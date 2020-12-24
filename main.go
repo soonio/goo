@@ -21,12 +21,12 @@ func main() {
 		fmt.Printf("%v.\n如下命令格式:\n\tgo run main.go packagename.funcitonName\n", err)
 		return
 	}
-	command := tools.Parse(args) // 解析命令行输入的参数
+	command, bit := tools.Parse(args) // 解析命令行输入的参数
 
 	// 本示例为了简单，使用简单的逻辑判断，确定是否执行对应的demo方法
-	switch command["command"] {
+	switch command {
 	case "basic":
-		basic.Run()
+		basic.Run(bit)
 		break
 	case "test":
 		break

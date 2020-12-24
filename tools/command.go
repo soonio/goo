@@ -3,6 +3,7 @@ package tools
 import (
 	"errors"
 	"os"
+	"strconv"
 )
 
 //关于命令行内容处理的工具方法
@@ -17,8 +18,12 @@ func GetArgs() ([]string, error) {
 }
 
 // 简单解析命令
-func Parse(args []string) map[string]string {
-	command := make(map[string]string, 5)
-	command["command"] = args[0]
-	return command
+func Parse(args []string) (string, int) {
+	bit := 0
+	if len(args) == 2 {
+		if IsNumeric(args[1]) {
+			bit, _ = strconv.Atoi(args[1])
+		}
+	}
+	return args[0], bit
 }

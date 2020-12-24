@@ -9,6 +9,7 @@ import (
 
 // 定义常量
 func defineConst() {
+	tools.ShowPosition("定义常量")
 	const PI = 3.14159       // 隐式类型定义
 	const Name string = "清流" // 显式类型定义 ，指出常量的类型名称
 
@@ -30,14 +31,32 @@ func defineConst() {
 // 定义变量
 func defineVar() {
 	//var identifier type
-	var name string
+
+	tools.ShowPosition("定义单个变量") // 这个函数无需理解
+	var name string = "no name"
 	name = "张三"
 	fmt.Printf("变量定义 name=%v, 类型:%T \n", name, name)
-	tools.ShowPosition() // 这个函数无需理解
+
+	tools.ShowPosition("批量定义")
+	var (
+		sex      uint8
+		age      uint8
+		describe string
+	)
+	fmt.Printf("默认值 sex:%v age:%v describe:%v\n", sex, age, describe)
 
 }
 
-func Run() {
-	defineConst()
+// 数据类型
+func dataType() {
+
+}
+
+func Run(bit int) {
+	fmt.Println(bit)
+	if true {
+		defineConst()
+	}
 	defineVar()
+	dataType()
 }
