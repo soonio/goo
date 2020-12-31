@@ -3,6 +3,9 @@ package basic
 import (
 	"fmt"
 	"goo/tools"
+	"math/rand"
+	"time"
+	"unsafe"
 )
 
 // 这一部分内容主要关于go中的基本类型
@@ -49,6 +52,23 @@ func defineVar() {
 
 // 数据类型
 func dataType() {
+	// 基本数据类型:
+	// 整型 浮点 布尔 字符串
+	// 复合类型:
+	// 数组 切片 结构体 函数 map 通道(channel) 接口
+
+	// 整型 => int8 int16 int32 int64 uint8 uint16 uint32 unit 64
+	// 其中int uint 在32位系统默认是int32 uint32
+	// uintptr 无符号指针
+
+	i64 := 9223372036854775807 // 在64位系统里再+1就会报错，
+	fmt.Printf("%v %T\n", unsafe.Sizeof(i64), i64)
+
+	rand.Seed(time.Now().Unix())
+	r := rand.Intn(2) // int8类型
+
+	var b = 1 == r // bool类型
+	fmt.Printf("%v %v %T \n", r, b, b)
 
 }
 

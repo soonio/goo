@@ -8,6 +8,7 @@ package main
 import (
 	"fmt"
 	"goo/example/basic"
+	"goo/example/file"
 	"goo/tools"
 )
 
@@ -27,6 +28,9 @@ func main() {
 	switch command {
 	case "basic":
 		basic.Run(bit)
+		break
+	case "file":
+		file.Run()
 		break
 	case "test":
 		break
