@@ -22,5 +22,6 @@ func Run() {
 	}
 
 	fmt.Println(n)
+	fmt.Println(tmp)
 
 }
