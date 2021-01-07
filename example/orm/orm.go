@@ -5,7 +5,7 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
-func Run() {
+func baseOrm() {
 	engine, _ := NewEngine("sqlite3", "./resource/gee.db")
 	defer engine.Close()
 
@@ -18,4 +18,7 @@ func Run() {
 	result, _ := s.Raw("INSERT INTO User(`Name`) values (?), (?)", "Tom", "Sam").Exec()
 	count, _ := result.RowsAffected()
 	fmt.Printf("Exec success, %d affected\n", count)
+}
+
+func Run() {
 }

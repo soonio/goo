@@ -2,18 +2,24 @@ package session
 
 import (
 	"database/sql"
+	"goo/example/orm/dialect"
 	"goo/example/orm/log"
+	"goo/example/orm/schema"
 	"strings"
 )
 
+// 主要用于实现和数据库交互
+
 type Session struct {
-	db      *sql.DB
-	sql     strings.Builder
-	sqlVars []interface{}
+	db       *sql.DB
+	dialect  dialect.Dialect
+	refTable *schema.Schema
+	sql      strings.Builder
+	sqlVars  []interface{}
 }
 
-func New(db *sql.DB) *Session {
-	return &Session{db: db}
+func New(db *sql.DB, dialect dialect.Dialect) *Session {
+	return &Session{db: db, dialect: dialect}
 }
 
 // 清空sql及参数

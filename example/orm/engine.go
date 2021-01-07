@@ -2,14 +2,16 @@ package orm
 
 import (
 	"database/sql"
+	"goo/example/orm/dialect"
 	"goo/example/orm/log"
 	"goo/example/orm/session"
 )
 
-// 用于管理 db 对象
+// 负责与DB对象交互，链接，测试链接成功与否
 
 type Engine struct {
-	db *sql.DB
+	db      *sql.DB
+	dialect dialect.Dialect
 }
 
 func NewEngine(driver, source string) (e *Engine, err error) {
@@ -25,7 +27,13 @@ func NewEngine(driver, source string) (e *Engine, err error) {
 		return
 	}
 
-	e = &Engine{db: db}
+	dial, ok := dialect.GetDialect(driver)
+	if !ok {
+		log.Errorf("dialect %s Not Found", driver)
+		return
+	}
+
+	e = &Engine{db: db, dialect: dial}
 	log.Info("connect db success")
 	return
 }
@@ -38,5 +46,5 @@ func (e *Engine) Close() {
 }
 
 func (e *Engine) NewSession() *session.Session {
-	return session.New(e.db)
+	return session.New(e.db, e.dialect)
 }
