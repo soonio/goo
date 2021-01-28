@@ -8,6 +8,12 @@ import (
 
 type sqlite3 struct{}
 
+var _ Dialect = (*sqlite3)(nil)
+
+func init() {
+	RegisterDialect("sqlite3", &sqlite3{})
+}
+
 func (s *sqlite3) DataTypeOf(typ reflect.Value) string {
 	switch typ.Kind() {
 	case reflect.Bool:
@@ -31,13 +37,6 @@ func (s *sqlite3) DataTypeOf(typ reflect.Value) string {
 	panic(fmt.Sprintf("invalid sql type %s (%s)", typ.Type().Name(), typ.Kind()))
 }
 
-func (s *sqlite3) TableExistSQL(tableName string) (string interface{}) {
+func (s *sqlite3) TableExistSQL(tableName string) (string, []interface{}) {
 	panic("implement me")
-}
-
-//
-var _ Dialect = (*sqlite3)(nil)
-
-func init() {
-	RegisterDialect("sqlite3", &sqlite3{})
 }
